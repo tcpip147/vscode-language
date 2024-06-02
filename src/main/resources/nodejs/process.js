@@ -30,8 +30,19 @@ function processRequest(request) {
 }
 
 function processCompletion(request) {
+  let parser;
+  if (request.languageType == "CSS") {
+    parser = "css";
+  } else if (request.languageType == "JAVASCRIPT") {
+  } else if (request.languageType == "HTML") {
+  } else {
+    request.error = "Cannot process languageType";
+    sendResponse(request);
+    return;
+  }
+
   try {
-    const document = vscodeCssLanguageService.TextDocument.create('', 'css', 1, request.data.text);
+    const document = vscodeCssLanguageService.TextDocument.create('', parser, 1, request.data.text);
     const position = vscodeCssLanguageService.Position.create(request.data.line, request.data.column);
     const stylesheet = cssLanguageService.parseStylesheet(document);
     const completion = cssLanguageService.doComplete(document, position, stylesheet);
@@ -61,6 +72,7 @@ function processFormatter(request) {
   } else {
     request.error = "Cannot process languageType";
     sendResponse(request);
+    return;
   }
 
   prettier

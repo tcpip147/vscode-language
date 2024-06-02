@@ -19,10 +19,10 @@
         <lang.parserDefinition language="Css"
                                implementationClass="com.tcpip147.vscodelanguage.css.language.CssParserDefinition"/>
         <completion.contributor language="Css"
-                                implementationClass="com.tcpip147.vscodelanguage.css.CssCompletionContributor"/>
+                                implementationClass="com.tcpip147.vscodelanguage.common.LanguageCompletionContributor"/>
     </extensions>
     <applicationListeners>
-        <listener class="com.tcpip147.vscodelanguage.css.CssAnActionListener"
+        <listener class="com.tcpip147.vscodelanguage.common.LanguageActionListener"
                   topic="com.intellij.openapi.actionSystem.ex.AnActionListener"/>
     </applicationListeners>
 </idea-plugin>

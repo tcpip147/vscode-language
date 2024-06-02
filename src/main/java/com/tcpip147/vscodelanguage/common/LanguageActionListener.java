@@ -1,4 +1,4 @@
-package com.tcpip147.vscodelanguage.css;
+package com.tcpip147.vscodelanguage.common;
 
 import com.intellij.codeInsight.actions.ReformatCodeAction;
 import com.intellij.openapi.actionSystem.AnAction;
@@ -15,7 +15,7 @@ import com.tcpip147.vscodelanguage.ipc.NodeJsProtocol;
 import com.tcpip147.vscodelanguage.ipc.ProcessType;
 import org.jetbrains.annotations.NotNull;
 
-public class CssAnActionListener implements AnActionListener {
+public class LanguageActionListener implements AnActionListener {
 
     @Override
     public void beforeActionPerformed(@NotNull AnAction action, @NotNull AnActionEvent event) {
