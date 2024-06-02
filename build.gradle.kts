@@ -7,6 +7,8 @@ plugins {
 group = "com.tcpip147"
 version = "1.0-SNAPSHOT"
 
+sourceSets["main"].java.srcDirs("src/main/gen")
+
 repositories {
     mavenCentral()
 }

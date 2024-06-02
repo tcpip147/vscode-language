@@ -1,0 +1,73 @@
+{
+  parserClass="com.tcpip147.vscodelanguage.css.language.parser.CssParser"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="Css"
+  psiImplClassSuffix="Impl"
+  psiPackage="com.tcpip147.vscodelanguage.css.language.psi"
+  psiImplPackage="com.tcpip147.vscodelanguage.css.language.psi.impl"
+
+  elementTypeHolderClass="com.tcpip147.vscodelanguage.css.language.psi.CssTypes"
+  elementTypeClass="com.tcpip147.vscodelanguage.css.language.psi.CssElementType"
+  tokenTypeClass="com.tcpip147.vscodelanguage.css.language.psi.CssTokenType"
+
+  tokens = [
+    COMMENT='COMMENT'
+    WHITE_SPACE='WHITE_SPACE'
+  ]
+}
+
+stylesheet ::= (CHARSET_SYM STRING SEMI_COLON)?
+    (CDO | CDC)* (import (CDO | CDC)*)*
+    ((ruleset | media | page) (CDO | CDC)*)*
+
+import ::= IMPORT_SYM (STRING | URI) media_list? SEMI_COLON
+
+media ::= MEDIA_SYM media_list BRACKET_OPEN ruleset* BRACKET_CLOSE
+
+media_list ::= medium (COMMA medium)*
+
+medium ::= IDENT
+
+page ::= PAGE_SYM pseudo_page? BRACKET_OPEN declaration? (SEMI_COLON declaration?)* BRACKET_CLOSE
+
+pseudo_page ::= COLON IDENT
+
+operator ::= OP_DIVIDE | COMMA
+
+combinator ::= OP_PLUS | GREATER_THAN
+
+property ::= IDENT
+
+ruleset ::= selector (COMMA selector)* declarations
+
+declarations ::= BRACKET_OPEN declaration? (SEMI_COLON declaration?)* BRACKET_CLOSE
+
+selector ::= simple_selector (combinator selector | (combinator? selector)?)?
+
+simple_selector ::= element_name (HASH | class | attrib | pseudo)* | (HASH | class | attrib | pseudo)+
+
+class ::= DOT IDENT
+
+element_name ::= IDENT | OP_MULTI
+
+attrib ::= SQUARE_BRACKET_OPEN IDENT ((OP_EQUALS | INCLUDES | DASHMATCH) (IDENT | STRING))? SQUARE_BRACKET_CLOSE
+
+pseudo ::= COLON (IDENT | IDENT PARENTHESES_OPEN IDENT? PARENTHESES_CLOSE)
+
+declaration ::= completedDeclaration | uncompletedDeclaration
+
+completedDeclaration ::= property COLON expr prio?
+
+uncompletedDeclaration ::= IDENT
+
+prio ::= IMPORTANT_SYM
+
+expr ::= term (operator? term)*
+
+term ::= (NUMBER | PERCENTAGE | LENGTH | EMS | EXS | ANGLE | TIME | FREQ) | STRING | IDENT | URI | hexcolor | function
+
+function ::= IDENT PARENTHESES_OPEN expr PARENTHESES_CLOSE
+
+hexcolor ::= HASH

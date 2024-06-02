@@ -16,13 +16,13 @@
                   fieldName="INSTANCE"
                   language="Css"
                   extensions="css"/>
-        <!--
-        <fileEditorProvider implementation="com.tcpip147.vscodelanguage.css.CssFileEditorProvider"/>
+        <lang.parserDefinition language="Css"
+                               implementationClass="com.tcpip147.vscodelanguage.css.language.CssParserDefinition"/>
         <completion.contributor language="Css"
                                 implementationClass="com.tcpip147.vscodelanguage.css.CssCompletionContributor"/>
-        -->
     </extensions>
     <applicationListeners>
-        <listener class="com.tcpip147.vscodelanguage.css.CssAnActionListener" topic="com.intellij.openapi.actionSystem.ex.AnActionListener"/>
+        <listener class="com.tcpip147.vscodelanguage.css.CssAnActionListener"
+                  topic="com.intellij.openapi.actionSystem.ex.AnActionListener"/>
     </applicationListeners>
 </idea-plugin>
